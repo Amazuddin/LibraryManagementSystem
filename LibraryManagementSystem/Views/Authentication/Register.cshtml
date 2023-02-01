@@ -1,0 +1,110 @@
+﻿@{
+    //Layout = null;
+    ViewBag.Title = "Register";
+}
+<head>
+    <title>Registration</title>
+    <link href="~/Content/register.css" rel="stylesheet"/>
+</head>
+
+<div class="register">
+    <div class="row">
+        <div class="col-md-12">
+            <p class="lbl-login animated swing" style="color: #e8a998d9; font-family: Monoton;">Register</p>
+            @if (ViewBag.Error != null)
+            {
+                <center><p class="cerror" id="error">@ViewBag.Error</p></center>
+                
+            }
+
+            <form style="padding: 2em 5em 5em;" id="register" action="~/Authentication/Register" method="POST" enctype="multipart/form-data">
+                <center>
+                    <table style="display: flex; justify-content: center;">
+                        <tr>
+                            <td>
+                                <label class="lbl-reg" for="Email">Email</label>
+                            </td>
+                            <td>
+                                <input class="user_design" type="email" name="Email" id="Email" placeholder="Email" required/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label class="lbl-reg" for="password">Password</label>
+                            </td>
+                            <td>
+                                <input class="user_design" type="password" name="Password" id="password" placeholder="Password" required/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="lbl-reg" for="cPassword">Confirm Password</label>
+                            </td>
+                            <td>
+                                <input class="user_design" type="password" name="cPassword" id="cPassword" placeholder="Confirm Password" required/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input class="btn btn-success regbutton" type="submit" value="REGISTER"/>
+                            </td>
+                        </tr>
+                    </table>
+                </center>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $("#error").hide(1000).empty();
+            }, 5000);
+
+
+            $("#register").validate({
+                rules: {
+                    Email: {
+                        required: true
+                    },
+
+                    Password: {
+                        required: true,
+                        minlength: 5
+                    },
+                    cPassword: {
+                        minlength: 5,
+                        equalTo: "#password"
+                    }
+                },
+                messages: {
+                    UserName: {
+                        required: "Please Enter Email"
+
+                    },
+                    Password: {
+                        required: "Please Enter Your Password",
+                        minlength: "Minimum length is 5"
+                    },
+                    cPassword: {
+                        minlength: "Minimum length is 5",
+                        equalTo: "Password not matched"
+                    }
+                }
+            });
+        });
+
+    </script>
+}

@@ -1,0 +1,83 @@
+﻿@using LibraryManagementSystem.Models
+@{
+    //Layout = null;
+}
+<link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet"/>
+<link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet"/>
+<style>
+    .designTable {
+        margin-bottom: 50px;
+        margin-top: 50px;
+    }
+</style>
+
+<div class="container">
+    <div class="row designTable">
+
+        <div class="col-md-12">
+            <table class="table table-bordered table-striped table-hover" id="borrowListTable">
+                <thead>
+                <tr>
+                    <th>Book Name</th>
+                    <th>Writer Name</th>
+                    <th style="width: 150px;">Return</th>
+
+                </tr>
+                </thead>
+                <tbody id="tableBody">
+
+                @foreach (ViewBorrowInfo item in ViewBag.borrowInfos)
+                {
+                    <tr>
+                        <td>@item.BookName</td>
+                        <td>@item.AuthorName</td>
+                        <td><button onclick="approve(@item.BorrowInfoId)" style="width:100%;" class="btn btn-success" id="apprbtn">Return</button></td>
+                    </tr>
+                    
+                }
+
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#borrowListTable').DataTable({
+                pageLength: 10,
+                filter: true,
+                deferRender: true,
+                "searching": true
+            });
+           
+        });
+
+
+
+
+        function approve(value) {
+
+            var json = { id: value};
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ChangeStatus", "Primary")',
+                contentType: 'application/json',
+                data: JSON.stringify(json),
+                success: function (response) {
+                    alert(response);
+                    location.reload();
+                }
+            });
+        }
+    </script>
+
+}

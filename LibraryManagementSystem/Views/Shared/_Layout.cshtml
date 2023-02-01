@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Library</title>
+    <link href="~/Content/custom.css" rel="stylesheet"/>
+    <link href="~/Content/animate.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Monoton"/>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/fontawesome.css" rel="stylesheet"/>
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.css" rel="stylesheet"/>
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet"/>
+
+</head>
+<body>
+<nav style="background-color: #152F4F; margin-top: -50px" class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand myclass  animated bounceInLeft" href="#" style="font-family: Monoton;">
+        Library
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="menual collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+
+        @if (Session["CurrentUserId"] == null)
+        {
+            <div class="navbar-nav">
+                <a class="nav-item nav-link @ViewBag.Login" href="@Url.Action("Login", "Authentication")">
+                    <button class="btn btn-primary" style="background-color: #152F4F; height: 45px; width: 110px;"><i class="fas fa-sign-in-alt icn"></i> Login</button>
+                </a>
+                <a class="nav-item nav-link @ViewBag.Register" href="@Url.Action("Register", "Authentication")">
+                    <button class="btn btn-primary" style="background-color: #152F4F; height: 45px; width: 110px;"><i class="fas fa-user-plus"></i> Register</button>
+                </a>
+
+            </div>
+        }
+        @if (Session["CurrentUserId"] != null)
+        {
+            <div class="navbar-nav">
+                <a class="nav-item nav-link @ViewBag.Borrow " href="@Url.Action("Index", "Primary")">
+                    <button class="btn btn-primary" style="background-color: #152F4F; height: 45px; width: 120px;"> Borrow </button>
+                </a>
+                
+                <a class="nav-item nav-link @ViewBag.ReturnBook " href="@Url.Action("ReturnBook", "Primary")">
+                    <button class="btn btn-primary" style="background-color: #152F4F; height: 45px; width: 120px;"> Return Book </button>
+                </a>
+
+                <a class="nav-item nav-link @ViewBag.BookInfo " href="@Url.Action("Index", "BookInfoes")">
+                    <button class="btn btn-primary" style="background-color: #152F4F; height: 45px; width: 120px;"> Book </button>
+                </a>
+                <a class="nav-item nav-link " href="@Url.Action("Logout", "Authentication")">
+                    <button class="btn btn-primary" style="background-color: #152F4F; height: 45px; width: 120px;"><i class="fas fa-sign-out-alt"></i> Logout </button>
+                </a>
+            </div>
+        }
+
+    </div>
+</nav>
+@*<div class="container body-content">*@
+@RenderBody()
+
+@*</div>*@
+
+
+<footer class="page-footer font-small unique-color-dark" style="background-color: #152F4F; color: white; margin-bottom: -20px; padding-top: 2em;">
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left mt-5">
+
+        <!-- Grid row -->
+        <div class="row mt-3">
+
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+                <!-- Content -->
+                <h6 class="font-weight-bold"> Library</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>
+                    a place set apart to contain books, periodicals, and other material for reading, viewing, listening, study, or reference,
+                    as a room, set of rooms,
+                    or building where books may be read or borrowed.
+                </p>
+
+            </div>
+            <!-- Grid column -->
+            <!-- Grid column -->
+            <!-- Grid column -->
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+                <!-- Links -->
+                <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                <p>
+                    <i class="fas fa-home mr-3"></i> Agrabad, Chittagong, 1212
+                </p>
+                <p>
+                    <i class="fas fa-envelope mr-3"></i> amaz@gmail,com
+                </p>
+                <p>
+                    <i class="fas fa-phone mr-3"></i> +88-02-791-5555 or +88-02-791-5556 or +88-02-791-5557
+                </p>
+                <p>
+                    <i class="fas fa-print mr-3"></i> +88-02-791-5858
+                </p>
+
+            </div>
+            <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+
+    </div>
+    <!-- Footer Links -->
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">
+        © @DateTime.Now.Year Copyright
+
+    </div>
+    <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+
+
+</body>
+</html>
+<script src="~/Scripts/fontawesome/all.min.js"></script>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+@RenderSection("scripts", false)

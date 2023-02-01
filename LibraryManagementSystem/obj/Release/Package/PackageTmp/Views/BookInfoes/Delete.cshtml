@@ -1,0 +1,81 @@
+﻿@model LibraryManagementSystem.Models.BookInfo
+
+@{
+    //Layout = null;
+}
+
+
+<meta name="viewport" content="width=device-width" />
+<title>Delete</title>
+<link href="~/Content/delete.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="deletePage">
+        @if (ViewBag.Error != null)
+        {
+            <div class="error_div">
+                <p class="cerror" id="error">@ViewBag.Error</p>
+            </div>
+        }
+
+        <h3>Are you sure you want to delete this?</h3>
+        <div>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    Book Name
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.BookName)
+                </dd>
+
+                <dt>
+                    Author Name
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AuthorName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Status)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Status)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-warning deleteButton" }) |
+                    <input type="submit" value="Delete" class="btn btn-danger deleteButton" />
+                   
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script>
+
+        $(document).ready(function() {
+
+            setTimeout(function() {
+                    $("#error").hide(1000).empty();
+                },
+                5000);
+        });
+
+    </script>
+}

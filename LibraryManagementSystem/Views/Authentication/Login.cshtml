@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+<link href="~/Content/Login.css" rel="stylesheet"/>
+<style>
+    
+    
+</style>
+<div class="container">
+    <center>
+        <div class="login">
+
+            <p class="lbl-login animated tada" style="font-family: Monoton;">
+                Login
+            </p>
+
+            @if (ViewBag.Error == "Error")
+            {
+                <p class="cerror ed" id="error">Login Failed: Incorrect UserName or Password</p>
+            }
+
+            <form style="margin-left: 1em; padding: 2em 5em 5em;" action="~/Authentication/LoginUser" method="POST">
+
+                <table style="display: flex; justify-content: center;">
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input class="user-name form-control" type="text" name="Email"
+                                   id="Email" placeholder="Email" required/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+
+                        <td>
+                            <input class="user-name form-control" type="password" name="password"
+                                   id="myInput" placeholder="Password" required/><br/>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="color: blue; float: left; font-weight: 700; margin-top: -40px;">
+                            <input type="checkbox" onclick="myFunction()"> Show Password
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input class="btn animate-btn" style="background-color: green; border-radius: 10px; color: white; font-weight: 700; height: 39px; margin: 10px 0; width: 100%;" type="submit" value="Login"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <center>
+                            <td style="margin: auto; text-align: center;">
+                                <a href="~/Authentication/Register" style="background-color: white; color: black; text-align: center;">Not Registerd? Register.</a>
+                            </td>
+                        </center>
+
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </center>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myInput");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                    $("#error").hide(1000).empty();
+                },
+                5000);
+        });
+    </script>
+}
